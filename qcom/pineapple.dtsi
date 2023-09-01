@@ -3583,6 +3583,7 @@
 #include "pineapple-pcie.dtsi"
 #include "msm-rdbg.dtsi"
 #include "pineapple-thermal.dtsi"
+#include "pineapple-walt.dtsi"
 
 &qupv3_se15_2uart {
 	status = "ok";

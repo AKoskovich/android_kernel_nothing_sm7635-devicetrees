@@ -3052,4 +3052,5 @@
 };
 
 #include "volcano-thermal.dtsi"
+#include "volcano-walt.dtsi"
 #include "msm-rdbg.dtsi"
