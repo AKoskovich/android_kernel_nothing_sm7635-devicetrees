@@ -4,9 +4,6 @@
 #include <dt-bindings/iio/qcom,spmi-adc5-gen3-pmk8550.h>
 #include <dt-bindings/iio/qcom,spmi-adc5-gen3-pm8550.h>
 #include <dt-bindings/iio/qcom,spmi-adc5-gen3-pm8550b.h>
-#ifndef PM8550VE_SID
-#define PM8550VE_SID	8
-#endif
 #include <dt-bindings/iio/qcom,spmi-adc5-gen3-pm8550vx.h>
 
 &spmi_bus {
@@ -299,35 +296,35 @@
 
 			/* PM8550VS_C Channel nodes */
 			pm8550vs_c_die_temp {
-				reg = <PM8550VS_C_ADC5_GEN3_DIE_TEMP>;
+				reg = <PM8550VX_ADC5_GEN3_DIE_TEMP(2)>;
 				label = "pm8550vs_c_die_temp";
 				qcom,pre-scaling = <1 1>;
 			};
 
 			/* PM8550VS_D Channel nodes */
 			pm8550vs_d_die_temp {
-				reg = <PM8550VS_D_ADC5_GEN3_DIE_TEMP>;
+				reg = <PM8550VX_ADC5_GEN3_DIE_TEMP(3)>;
 				label = "pm8550vs_d_die_temp";
 				qcom,pre-scaling = <1 1>;
 			};
 
 			/* PM8550VS_E Channel nodes */
 			pm8550vs_e_die_temp {
-				reg = <PM8550VS_E_ADC5_GEN3_DIE_TEMP>;
+				reg = <PM8550VX_ADC5_GEN3_DIE_TEMP(4)>;
 				label = "pm8550vs_e_die_temp";
 				qcom,pre-scaling = <1 1>;
 			};
 
 			/* PM8550VS_G Channel nodes */
 			pm8550vs_g_die_temp {
-				reg = <PM8550VS_G_ADC5_GEN3_DIE_TEMP>;
+				reg = <PM8550VX_ADC5_GEN3_DIE_TEMP(6)>;
 				label = "pm8550vs_g_die_temp";
 				qcom,pre-scaling = <1 1>;
 			};
 
 			/* PM8550VE Channel nodes */
 			pm8550ve_die_temp {
-				reg = <PM8550VE_ADC5_GEN3_DIE_TEMP>;
+				reg = <PM8550VX_ADC5_GEN3_DIE_TEMP(8)>;
 				label = "pm8550ve_die_temp";
 				qcom,pre-scaling = <1 1>;
 			};
