@@ -3,6 +3,7 @@
 &soc {
 	qcom,dma-heaps {
 		compatible = "qcom,dma-heaps";
+		depends-on-supply = <&qcom_scm>;
 
 		qcom,secure_cdsp {
 			qcom,dma-heap-name = "qcom,cma-secure-cdsp";
