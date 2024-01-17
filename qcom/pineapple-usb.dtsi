@@ -61,13 +61,13 @@
 		 */
 		dummy-supply = <&apps_smmu>;
 
-		dwc3@a600000 {
+		dwc3_0: dwc3@a600000 {
 			compatible = "snps,dwc3";
 			reg = <0xa600000 0xd93c>;
 
 			iommus = <&apps_smmu 0x40 0x0>;
 			qcom,iommu-dma = "atomic";
-			qcom,iommu-dma-addr-pool = <0x90000000 0x60000000>;
+			iommu-addresses = <&dwc3_0 0x0 0x90000000>, <&dwc3_0 0xf0000000 0x10000000>;
 			dma-coherent;
 
 			interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
