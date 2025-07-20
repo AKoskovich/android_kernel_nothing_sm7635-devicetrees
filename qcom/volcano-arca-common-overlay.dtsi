@@ -1,3 +1,9 @@
+&usb0 {
+	dwc3@a600000 {
+		maximum-speed = "high-speed";
+	};
+};
+
 &soc {
 	bootloader_log {
 		compatible = "nothing,bootloader_log";
