@@ -1,0 +1,69 @@
+&soc {
+	shell_front {
+		compatible = "nothing,virtual-ntc";
+	};
+
+	shell_frame {
+		compatible = "nothing,virtual-ntc";
+	};
+
+	shell_back {
+		compatible = "nothing,virtual-ntc";
+	};
+
+	shell_max {
+		compatible = "nothing,virtual-ntc";
+	};
+};
+
+&thermal_zones {
+	nrpa_ntc {
+		cooling-maps {
+			display_cdev1 {
+				trip = <&display_test_config1>;
+				cooling-device = <&display_fps 1 1>;
+			};
+
+			display_cdev2 {
+				trip = <&display_test_config2>;
+				cooling-device = <&display_fps 2 2>;
+			};
+
+			display_cdev3 {
+				trip = <&display_test_config3>;
+				cooling-device = <&display_fps 3 3>;
+			};
+
+			display_cdev4 {
+				trip = <&display_test_config4>;
+				cooling-device = <&display_fps 4 4>;
+			};
+		};
+	};
+
+	socd {
+		polling-delay-passive = <100>;
+		polling-delay = <0>;
+		thermal-sensors = <&bcl_soc>;
+
+		trips {
+			thermal-engine-trip {
+				temperature = <100>;
+				hysteresis = <0>;
+				type = "passive";
+			};
+
+			thermal-hal-trip {
+				temperature = <100>;
+				hysteresis = <0>;
+				type = "passive";
+			};
+
+			socd-trip {
+				temperature = <100>;
+				hysteresis = <0>;
+				type = "passive";
+			};
+		};
+	};
+};

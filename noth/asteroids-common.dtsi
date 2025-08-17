@@ -1,0 +1,273 @@
+#include <dt-bindings/clock/qcom,rpmh.h>
+
+#include "asteroids-common-pinctrl.dtsi"
+#include "asteroids-common-pmic.dtsi"
+#include "asteroids-common-thermal.dtsi"
+
+/ {
+	/delete-node/ mem-offline;
+};
+
+&battery_charger {
+	chg_data_id = <6>;
+};
+
+&eusb2_phy0 {
+	dummy-supply = <&pmiv0104_eusb2_repeater>;
+	usb-repeater = <&pmiv0104_eusb2_repeater>;
+};
+
+&pm7550_l22 {
+	regulator-min-microvolt = <3300000>;
+	regulator-max-microvolt = <3300000>;
+	qcom,init-voltage = <3300000>;
+};
+
+&pmiv0104_eusb2_repeater {
+	status = "ok";
+	vdd18-supply = <&L7B>;
+	vdd3-supply = <&L17B>;
+
+	qcom,param-override-seq =
+		<0x6 0x51
+		 0x1 0x53
+		 0x5 0x54
+		 0x3 0x55
+		 0x6 0x57
+		 0x3 0x59>;
+	qcom,host-param-override-seq =
+		<0x6 0x51
+		 0x2 0x53
+		 0x4 0x54
+		 0x0 0x55
+		 0x6 0x57
+		 0x0 0x59>;
+};
+
+&qupv3_se0_spi {
+	/delete-property/ qcom,la-vm;
+	/delete-property/ qcom,touch-active;
+
+	goodix-berlin@0 {
+		status = "disabled";
+	};
+
+	focaltech@0 {
+		compatible = "focaltech,fts_ts";
+		reg = <0x0>;
+		spi-max-frequency = <12000000>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <19 0x2008>;
+		focaltech,reset-gpio = <&tlmm 20 0x00>;
+		focaltech,irq-gpio = <&tlmm 19 0x2008>;
+		focaltech,max-touch-number = <10>;
+		focaltech,display-coords = <0 0 1080 2392>;
+		vci-supply = <&L22B>;
+		vddio-supply = <&L11B>;
+		status = "ok";
+	};
+};
+
+&qupv3_se1_i2c {
+	status = "ok";
+	st_st21nfc@08 {
+		compatible = "st,st21nfc";
+		reg = <0x08>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <31 0>;
+		reset-gpios = <&tlmm 7 0>;
+		irq-gpios = <&tlmm 31 0>;
+		clkreq-gpios = <&tlmm 6 0>;
+		clocks = <&rpmhcc RPMH_LN_BB_CLK2>;
+		clock-names = "nfc_ref_clk";
+		st,clk_pinctrl;
+		status = "ok";
+	};
+};
+
+&qupv3_se6_spi {
+	status = "ok";
+
+	st54spi: st54spi@0 {
+		compatible = "st,st54spi";
+		reg = <0>;
+		spi-max-frequency = <1000000>;
+
+		/* gpio used as SE_PWR_REQ or SE_nRESET */
+		gpio-power_nreset-std = <&tlmm 14 0x00>;
+
+		/* Power management mode: none, ST54H (default), ST54J */
+		power_mode = "ST54J";
+
+		status = "ok";
+	};
+};
+
+&qupv3_se7_i2c {
+	status = "ok";
+	aw20036_led@3a {
+		compatible = "awinic,aw20036_led";
+		reg = <0x3a>;
+		irq-gpio = <&tlmm 52 0>;
+		reset-gpio = <&tlmm 54 0>;
+		aw20036,led {
+			aw20036,name = "aw20036_led";
+			aw20036,imax = <1>;
+			aw20036,brightness = <128>;
+			aw20036,max_brightness = <255>;
+		};
+	};
+};
+
+&qupv3_se8_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	qcom,clk-freq-out = <1000000>;
+	status = "ok";
+
+	ics_haptic_top: ics_haptic@5f {
+		compatible = "ics,haptic_rt";
+		reg = <0x5f>;
+		device-name = "vibrator_nt";
+		richtap-name = "aac_richtap";
+		pinctrl-names = "default";
+		pinctrl-0 = <&ics_haptic_rst_pinctrl &ics_haptic_irq_pinctrl>;
+		reset-gpio = <&tlmm 138 0>;
+		irq-gpio = <&tlmm 143 0>;
+		rt6010_boost_mode = <0x00>;
+		rt6010_boost_vol = <0x0A>;
+		rt6010_brake_acq_point = <0>;
+		rt6010_brake_const = <0>;
+		rt6010_brake_en = <0>;
+		rt6010_brake_wave_no = <0>;
+		rt6010_chip_id = <0x6B>;
+		rt6010_fifo_ae = <0x200>;
+		rt6010_fifo_af = <0x300>;
+		rt6010_gain = <0x80>;
+		rt6010_list_base_addr = <0x400>;
+		rt6010_ram_size = <0x600>;
+		rt6010_reg_size = <0x6C>;
+		rt6010_sys_f0 = <1700>;
+		rt6010_wave_base_addr = <0x420>;
+		status = "ok";
+	};
+};
+
+&reserved_memory {
+	ramoops_mem: ramoops_region@0x81f20000 {
+		compatible = "ramoops";
+		reg = <0x0 0x81f20000 0x0 0x400000>;
+		size = <0x400000>;
+		console-size = <0x200000>;
+		pmsg-size = <0x200000>;
+		mem-type = <2>;
+		linux,reserve-contiguous-region;
+		linux,reserve-region;
+		linux,remove-completely;
+	};
+};
+
+&sdhc_2 {
+	status = "disabled";
+};
+
+&soc {
+	/delete-node/ ramoops_region;
+
+	bootloader_log {
+		compatible = "nothing,bootloader_log";
+		memory-region = <&uefi_log_mem>;
+	};
+
+	cable_detect {
+		compatible = "nt,cable_detect";
+		ant0_present = <&tlmm 34 0x00>;
+		ant2_present = <&tlmm 35 0x00>;
+	};
+
+	goodix_fp {
+		compatible = "goodix,fingerprint";
+		interrupt-parent = <&tlmm>;
+		vdd-supply = <&L23B>;
+		vdd-max-uv = <3000000>;
+		vdd-min-uv = <3000000>;
+		fp-gpio-irq = <&tlmm 75 0x00>;
+		fp-gpio-reset = <&tlmm 76 0x00>;
+		status = "ok";
+	};
+
+	nothing_secure_element {
+		compatible = "nothing,secure_element";
+		// HWIO_OEM_SECURITY_POLICY_LSB_ADDR
+		oem_sec_boot_addr = <0x221C8C70>;
+	};
+
+	ois_vdd_ctrl {
+		compatible = "nt,ois_vdd_ctrl";
+		ois-vdd-supply = <&WL_LDO6>;
+		ois-vdd-max-uv = <3004000>;
+		ois-vdd-min-uv = <3004000>;
+	};
+
+	qcom,msm-imem@14680000 {
+		restart_info@bf0 {
+			compatible = "nothing,msm-imem-restart_info";
+			reg = <0xbf0 0x64>;
+			info_size = <0x64>;
+		};
+	};
+
+	slot_detect {
+		compatible = "nt,slot_detect";
+		uim0_present = <&tlmm 99 0x00>;
+		uim1_present = <&tlmm 103 0x00>;
+	};
+};
+
+&tlmm {
+	qcom,gpios-reserved = <13 63 64>;
+
+	ics_haptic_rst_pinctrl: ics_haptic_rst_pinctrl {
+		mux {
+			pins = "gpio138";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio138";
+			drive-strength = <2>;
+			bias-disable;
+			output-high;
+		};
+	};
+
+	ics_haptic_irq_pinctrl: ics_haptic_irq_pinctrl {
+		mux {
+			pins = "gpio143";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio143";
+			bias-pull-up;
+			input-enable;
+			drive-open-drain;
+		};
+	};
+};
+
+&trusted_apps_mem {
+	reg = <0x0 0xe9500000 0x0 0x5500000>;
+};
+
+&ufshc_mem {
+	limit-tx-hs-gear = <3>;
+	limit-rx-hs-gear = <3>;
+
+	/delete-property/ vccq-supply;
+	/delete-property/ vccq-max-microamp;
+};
+
+&usb0 {
+	dwc3@a600000 {
+		maximum-speed = "high-speed";
+	};
+};

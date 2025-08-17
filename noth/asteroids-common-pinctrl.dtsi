@@ -1,0 +1,23 @@
+&qupv3_se8_i2c_sleep {
+	config {
+		output-high;
+	};
+};
+
+&qupv3_se13_i2c_scl_active {
+	config {
+		/delete-property/ qcom,i2c_pull;
+	};
+};
+
+&qupv3_se13_i2c_sda_active {
+	config {
+		/delete-property/ qcom,i2c_pull;
+	};
+};
+
+&qupv3_se13_i2c_sleep {
+	config {
+		output-high;
+	};
+};

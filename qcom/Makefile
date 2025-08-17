@@ -12,6 +12,7 @@ add-overlays = $(foreach o,$1,$(foreach b,$2,$(eval $(basename $b)-$(basename $o
 #
 
 ifneq ($(CONFIG_ARCH_QTI_VM), y)
+ifeq (1,0)
 
 PINEAPPLE_BASE_DTB += pineapple-v2.dtb pineapple-qcm.dtb
 PINEAPPLE_APQ_BASE_DTB += pineapplep-v2.dtb pineapplep-sg-v2.dtb pineappleq-v2.dtb pineapplep-qcs.dtb
@@ -61,15 +62,37 @@ pineapple-dtb-$(CONFIG_ARCH_CLIFFS) += \
 	$(call add-overlays, $(CLIFFS_BOARDS),$(CLIFFS_APQ_BASE_DTB))
 pineapple-overlays-dtb-$(CONFIG_ARCH_CLIFFS) += $(CLIFFS_BOARDS) $(NOAPQ_CLIFFS_BOARDS) $(CLIFFS_BASE_DTB) $(CLIFFS_APQ_BASE_DTB)
 
-VOLCANO_BASE_DTB += volcano.dtb
+VOLCANO_BASE_DTB += volcano.dtb volcano6.dtb volcano6i-fp1.dtb volcano6i-fp2.dtb volcano6i-fp3.dtb volcano6i-fp4.dtb
+VOLCANO_APQ_BASE_DTB += volcano6p.dtb volcano6ip-fp1.dtb volcano6ip-fp2.dtb volcano6ip-fp3.dtb volcano6ip-fp4.dtb
 
 VOLCANO_BOARDS += \
+		volcano-atp-overlay.dtbo \
+		volcano-idp-overlay.dtbo \
+		volcano-idp-evros-overlay.dtbo \
+		volcano-idp-wcd9395-overlay.dtbo \
+		volcano-idp-wcd9395-evros-overlay.dtbo \
+		volcano6i-idp-wcd9395-ganges-overlay.dtbo \
+		volcano6i-idp-wcd9395-brahma-overlay.dtbo \
+		volcano-mtp-overlay.dtbo \
+		volcano-mtp-wcd9395-aatc-overlay.dtbo \
+		volcano-mtp-wcd9395-aatc-evros-overlay.dtbo \
+		volcano-mtp-wcd9378-hsj-evros-overlay.dtbo \
+		volcano-mtp-pm7550ba-overlay.dtbo \
+		volcano6i-mtp-wcd9395-ganges-overlay.dtbo \
+		volcano6i-mtp-ganges-overlay.dtbo \
+		volcano6i-mtp-wcd9395-ganges-hac2019-overlay.dtbo \
+		volcano6i-mtp-wcd9395-brahma-overlay.dtbo \
+		volcano6i-mtp-brahma-overlay.dtbo \
+		volcano6i-mtp-wcd9395-moselle-overlay.dtbo \
+		volcano6i-mtp-moselle-wingmate-overlay.dtbo \
 		volcano-qrd-overlay.dtbo \
-		volcano-qrd-pro-overlay.dtbo
+		volcano6i-qrd-moselle-overlay.dtbo \
+		volcano6i-mtp-STSafe320-brahma-overlay.dtbo
 
 pineapple-dtb-$(CONFIG_ARCH_VOLCANO) += \
-	$(call add-overlays, $(VOLCANO_BOARDS), $(VOLCANO_BASE_DTB))
-pineapple-overlays-dtb-$(CONFIG_ARCH_VOLCANO) += $(VOLCANO_BOARDS) $(VOLCANO_BASE_DTB)
+	$(call add-overlays, $(VOLCANO_BOARDS) $(NOAPQ_VOLCANO_BOARDS),$(VOLCANO_BASE_DTB))\
+	$(call add-overlays, $(VOLCANO_BOARDS), $(VOLCANO_APQ_BASE_DTB))
+pineapple-overlays-dtb-$(CONFIG_ARCH_VOLCANO) += $(VOLCANO_BOARDS) $(NOAPQ_VOLCANO_BOARDS) $(VOLCANO_BASE_DTB) $(VOLCANO_APQ_BASE_DTB)
 
 dtb-y += $(pineapple-dtb-y)
 
@@ -259,6 +282,7 @@ pitti-dtb-$(CONFIG_ARCH_PITTI) += \
 pitti-overlays-dtb-$(CONFIG_ARCH_PITTI) += $(PITTI_BOARDS) $(NOAPQ_PITTI_BOARDS) $(PITTI_BASE_DTB)
 dtb-y += $(pitti-dtb-y)
 
+endif
 endif
 
 MONACO_AUTO_BASE_DTB	+= monaco_auto.dtb

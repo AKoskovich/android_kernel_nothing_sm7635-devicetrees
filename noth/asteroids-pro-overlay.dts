@@ -1,0 +1,12 @@
+/dts-v1/;
+/plugin/;
+
+#include "../qcom/volcano-qrd.dtsi"
+#include "asteroids-common.dtsi"
+
+/ {
+	model = "Nothing Phone (3a) Pro";
+	qcom,msm-id = <636 0x10000>;
+	qcom,board-id = <11 0>;
+	qcom,oem-id = <2>;
+};

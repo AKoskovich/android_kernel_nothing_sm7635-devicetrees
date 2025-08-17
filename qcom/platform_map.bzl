@@ -644,7 +644,6 @@ _platform_map = {
             {"name": "volcano6i-mtp-wcd9395-moselle-overlay.dtbo"},
             {"name": "volcano6i-mtp-moselle-wingmate-overlay.dtbo"},
             {"name": "volcano-qrd-overlay.dtbo"},
-            {"name": "volcano-qrd-pro-overlay.dtbo"},
             {"name": "volcano6i-qrd-moselle-overlay.dtbo"},
             {"name": "volcano6i-mtp-STSafe320-brahma-overlay.dtbo"},
         ],
