@@ -200,19 +200,6 @@
 				qcom,mdss-dsi-timing-switch-command-state =
 					"dsi_lp_mode";
 
-				qcom,mdss-dsi-switch-120hz-command = [
-					15 01 00 00 00 00 02 2F 05
-				];
-				qcom,mdss-dsi-switch-120hz-command-state = "dsi_hs_mode";
-				qcom,mdss-dsi-switch-90hz-command = [
-					15 01 00 00 00 00 02 2F 06
-				];
-				qcom,mdss-dsi-switch-90hz-command-state = "dsi_hs_mode";
-				qcom,mdss-dsi-switch-60hz-command = [
-					15 01 00 00 00 00 02 2F 07
-				];
-				qcom,mdss-dsi-switch-60hz-command-state = "dsi_hs_mode";
-
 				qcom,mdss-dsi-h-sync-pulse = <0>;
 				qcom,compression-mode = "dsc";
 				qcom,mdss-dsc-slice-height = <8>;
@@ -221,6 +208,30 @@
 				qcom,mdss-dsc-bit-per-component = <10>;
 				qcom,mdss-dsc-bit-per-pixel = <8>;
 				qcom,mdss-dsc-block-prediction-enable;
+
+				qcom,mdss-dsi-dfps-commands {
+					fps@120 {
+						qcom,dsi-fps-value = <120>;
+						qcom,mdss-dsi-fps-switch-command = [
+							15 01 00 00 00 00 02 2F 05
+						];
+						qcom,mdss-dsi-fps-switch-command-state = "dsi_hs_mode";
+					};
+					fps@90 {
+						qcom,dsi-fps-value = <90>;
+						qcom,mdss-dsi-fps-switch-command = [
+							15 01 00 00 00 00 02 2F 05
+						];
+						qcom,mdss-dsi-fps-switch-command-state = "dsi_hs_mode";
+					};
+					fps@60 {
+						qcom,dsi-fps-value = <60>;
+						qcom,mdss-dsi-fps-switch-command = [
+							15 01 00 00 00 00 02 2F 07
+						];
+						qcom,mdss-dsi-fps-switch-command-state = "dsi_hs_mode";
+					};
+				};
 			};
 		};
 	};
