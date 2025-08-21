@@ -371,7 +371,7 @@
 		};
 
 		pm6150a_amoled: qcom,amoled {
-			compatible = "qcom,qpnp-amoled-regulator";
+			compatible = "qcom,amoled-regulator";
 			status = "disabled";
 
 			oledb_vreg: oledb@e000 {
