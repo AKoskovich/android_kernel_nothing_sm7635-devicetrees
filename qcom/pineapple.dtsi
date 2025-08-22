@@ -1523,6 +1523,7 @@
 		dma-coherent;
 
 		qcom,bypass-pbl-rst-wa;
+		qcom,max-cpus = <8>;
 
 		msi-parent = <&gic_its 0x60>;
 		qcom,broken-ahit-wa;
