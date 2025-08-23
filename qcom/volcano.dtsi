@@ -1499,6 +1499,7 @@
 		compatible = "qcom,cpucp";
 		reg =   <0x17400000 0x10>,
 			<0x17d90000 0x2000>;
+		reg-names = "tx", "rx";
 		#mbox-cells = <1>;
 		interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>;
 	};
@@ -1537,6 +1538,7 @@
 		compatible = "qcom,cpucp-log";
 		reg = <0x81840000 0x10000>, <0x81850000 0x10000>;
 		mboxes = <&cpucp 1>;
+		qcom,log-type = <0>;
 	};
 
 	qcom_pmu: qcom,pmu {
