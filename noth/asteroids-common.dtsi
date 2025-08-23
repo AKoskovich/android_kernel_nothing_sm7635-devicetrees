@@ -2,7 +2,6 @@
 
 #include "asteroids-common-pinctrl.dtsi"
 #include "asteroids-common-pmic.dtsi"
-#include "asteroids-common-thermal.dtsi"
 
 / {
 	/delete-node/ mem-offline;
