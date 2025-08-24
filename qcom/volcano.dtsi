@@ -2348,7 +2348,7 @@
 				<&aggre2_noc MASTER_CRYPTO &mc_virt SLAVE_EBI1>;
 		interconnect-names = "rproc_ddr", "crypto_ddr";
 
-		memory-region = <&mpss_mem &q6_mpss_dtb_mem &system_cma>;
+		memory-region = <&mpss_mem &system_cma>;
 		firmware-name = "modem.mdt";
 
 		/* Inputs from mss */
