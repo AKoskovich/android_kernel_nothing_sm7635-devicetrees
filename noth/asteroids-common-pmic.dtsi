@@ -38,6 +38,20 @@
 	};
 };
 
+&qupv3_se7_i2c {
+	pm8010m@9 {
+		status = "disabled";
+	};
+
+	pm8010n@15 {
+		status = "disabled";
+	};
+};
+
+&regulator_ocp_notifier {
+	status = "disabled";
+};
+
 &soc {
 	gpio_key {
 		pinctrl-0 = <&key_vol_up_default &ai_key_default>;
