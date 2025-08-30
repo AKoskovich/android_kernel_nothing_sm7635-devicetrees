@@ -186,14 +186,14 @@
 	pa_therm1 {
 		pa_therm1_default: pa_therm1_default {
 			pins = "gpio7";
-			bias-high-impedence;
+			bias-high-impedance;
 		};
 	};
 
 	gnss_third_therm {
 		gnss_third_therm_default: gnss_third_therm_default {
 			pins = "gpio4";
-			bias-high-impedence;
+			bias-high-impedance;
 		};
 	};
 

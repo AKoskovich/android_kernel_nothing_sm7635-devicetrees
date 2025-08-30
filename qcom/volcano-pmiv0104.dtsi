@@ -27,7 +27,7 @@
 	charger_skin_therm {
 		charger_skin_therm_default: charger_skin_therm_default {
 			pins = "gpio6";
-			bias-high-impedence;
+			bias-high-impedance;
 		};
 	};
 };
